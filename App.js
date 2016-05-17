@@ -1,13 +1,46 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
-//One way of declaring a component where the component can have state.
 class App extends React.Component {
-  render() {
-    return <div>Hello world</div>
+  constructor(){
+    super();
+    this.update = this.update.bind(this);
+    this.state = {increasing: false}
   }
+  // .setProps has been depricated we rerender the button instead
+  // https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#new-deprecations-introduced-with-a-warning
+  update(){
+    ReactDOM.render(
+      <App val={this.props.val+1} />,
+      document.getElementById('app')
+    );
+  }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      increasing: nextProps.val > this.props.val
+    })
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.val % 5 === 0;
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Prev props", prevProps)
+  }
+
+  render(){
+    console.log(this.state.increasing)
+    return (
+      <button onClick={this.update}>
+        {this.props.val}
+      </button>)
+  }
+
 }
 
-//Another method for declaring a component where the component is stateless
-//const App = () => <h1>Hello world</h1>
+App.defaultProps = { val: 0 }
 
 export default App
+
+//What we learned
+//Using the shouldComponentUpdate method we can decide when we wish our component to update to increase efficiency
