@@ -1,13 +1,26 @@
-import React from 'react'
+import React from 'react';
 
-//One way of declaring a component where the component can have state.
 class App extends React.Component {
-  render() {
-    return <div>Hello world</div>
+
+  render(){
+    return (
+      <Button>I <Heart /> React</Button>
+    )
   }
 }
 
-//Another method for declaring a component where the component is stateless
-//const App = () => <h1>Hello world</h1>
+class Button extends React.Component {
+  render(){
+    return(
+      <button>{this.props.children}</button>
+    )
+  }
+}
+
+const Heart = () => <span className="glyphicon glyphicon-heart"></span>
 
 export default App
+
+//What we did this lesson
+//Using this.props.children
+//Using glyphicons note note working. We can access nested components
