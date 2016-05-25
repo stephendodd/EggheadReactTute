@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class App extends React.Component {
-
+let Mixin = InnerComponent => class extends React.Component {
   constructor(){
     super();
     this.update = this.update.bind(this);
@@ -15,21 +14,41 @@ class App extends React.Component {
     console.log('will mount')
   }
 
+  render() {
+    return (
+      <InnerComponent
+        update={this.update}
+        {...this.state}
+        {...this.props} />
+    );
+  }
+
   componentDidMount(){
     console.log('mounted')
   }
+}
 
-  render(){
+const Button = (props) => <button
+                            onClick={props.update}>
+                            {props.txt} - {props.val}
+                          </button>
+
+let ButtonMixed = Mixin(Button)
+
+class App extends React.Component {
+
+  render() {
     return (
-        <button onClick={this.update}>
-          {this.props.txt} - {this.state.val}
-        </button>
+      <div>
+        <ButtonMixed txt ="Button" />
+      </div>
     );
   }
 
 }
-App
-
-App.defaultProps = {txt: 'button'}
 
 export default App
+
+//What I learn?
+//How to use mixins
+//Can use mixins to give multiple components similar functions
