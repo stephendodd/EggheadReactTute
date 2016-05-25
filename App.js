@@ -58,3 +58,4 @@ export default App
 //What I learn?
 //How to use mixins
 //Can use mixins to give multiple components similar functions
+//Learned how to use the ... spread function this function allows us to access all possible values of an array. ie let myArray=[0,1,2,3] console.log(...myArray) would output 0,1,2,3
