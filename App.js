@@ -1,13 +1,26 @@
-import React from 'react'
+import React from 'react';
 
-//One way of declaring a component where the component can have state.
 class App extends React.Component {
-  render() {
-    return <div>Hello world</div>
+  const App = (props) => {
+  var myStyle = {
+  backgroundColor:"#000",
+  height: 10
+  }
+  return (
+  <div style={myStyle}>
+  <a href="#"
+  notrendered="x"
+  onClick={update}>
+  {/*This is a comment*/}
+  this is the text
+  {i>1 ? "More than 1" : "1"}
+  </a>
+  </div>
+  )
   }
 }
 
-//Another method for declaring a component where the component is stateless
-//const App = () => <h1>Hello world</h1>
-
 export default App
+
+//What did I learn
+//How the 
