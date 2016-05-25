@@ -33,7 +33,12 @@ const Button = (props) => <button
                             {props.txt} - {props.val}
                           </button>
 
+const Label = (props) => <label
+                            onMouseMove={props.update}>
+                            {props.txt} - {props.val}
+                          </label>
 let ButtonMixed = Mixin(Button)
+let LabelMixed = Mixin(Label)
 
 class App extends React.Component {
 
@@ -41,6 +46,7 @@ class App extends React.Component {
     return (
       <div>
         <ButtonMixed txt ="Button" />
+        <LabelMixed txt ="Label" />
       </div>
     );
   }
