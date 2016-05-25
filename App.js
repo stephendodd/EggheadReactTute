@@ -1,13 +1,54 @@
-import React from 'react'
+import React from 'react';
 
-//One way of declaring a component where the component can have state.
 class App extends React.Component {
-  render() {
-    return <div>Hello world</div>
+  constructor() {
+    super();
+    this.state = {
+      input: '/* add your jsx here */',
+      output: '',
+      err: ''
+    }
+    this.update = this.update.bind(this);
   }
+
+  update(e) {
+    let code = e.target.value;
+    try {
+      this.setState({
+        output: babel.transform(code, {
+          stage: 0,
+          loose: 'all'
+        }).code,
+        err:''
+      })
+    }
+    catch(err) {
+      this.setState({
+        err: err.message
+      })
+    }
+  }
+  render() {
+    return (
+      <div>
+        <header>{this.state.err}</header>
+        <div className="container">
+          <textarea onChange={this.update}
+            defaultValue={this.state.input}>
+          </textarea>
+          <pre>
+            {this.state.output}
+          </pre>
+        </div>
+      </div>
+    )
+  }
+
 }
 
-//Another method for declaring a component where the component is stateless
-//const App = () => <h1>Hello world</h1>
-
 export default App
+
+//What did I learned
+//how to use try and catch to find errors
+//how to tranform code to babel to create the trancriber
+//How to add css to make the page look better
